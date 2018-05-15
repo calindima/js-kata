@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cookies</title>
+    <style>
+    .cookie-monster {
+        width: 300px;
+        height: 200px;
+        position: absolute;
+        top: 0;
+        left:-400px;
+        background: #c0ffee;
+        border: 1px solid black;
+        transition: all 1s ease-in-out;
+    }
+    </style>
+</head>
+<body>
+    <div class="cookie-monster">
+        <h1>You have been f0k1n c00k13d!</h1>
+        <button>n0 f0k1n w4y!!!</button> 
+    </div>
+    <script>
+        const cookieBox = document.querySelector('.cookie-monster');
+        const cookieBtn = document.querySelector('.cookie-monster button');
+
+    window.onload = () => {
+        cookieBox.style.left = "50px";
+    };
+    cookieBtn.addEventListener('click', () => {
+        cookieBox.style.left = "-400px";
+    });
+    
+    </script>
+</body>
+</html>
