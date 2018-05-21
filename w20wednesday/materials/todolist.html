@@ -17,5 +17,16 @@
         <li>Ignore the kids</li>
         <li>Feed the cat</li>
     </ul>
+    <script src="Speak.js"></script>
+    <script>
+    const speech = new Speak();
+    speech.speak(document.querySelector('h1').textContent);
+    const li = Array.from( document.querySelectorAll('li') ).map( li => li.textContent);
+    li.map(li => { 
+        if(li.search('kid') == -1){
+        speech.speak(li);
+        }
+    });
+    </script>
 </body>
 </html>
