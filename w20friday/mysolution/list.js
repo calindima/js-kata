@@ -69,17 +69,30 @@ const list_data = [
     }
 ];
 
+const theList = document.createElement('ul');
+theList.setAttribute('id', 'thelist');
 
 function buildList() {
 
     // build a list of all the links in list_data
-
+const linkList = Array.from(list_data).map(li => li.link);
     // create a <li>-element for each one, let it contain a link to the link, with the description as text
 
     // use the createLi function to create an li-element
 
     // append all the created <li>-elements to #thelist
+Array.from(list_data).map(li => createLi(li));
+document.body.appendChild(theList);
 
 }
 
 // TODO: Make function createLi
+function createLi(li) {
+    const newLi = document.createElement('li');
+    const newA = document.createElement('a')
+    newA.setAttribute('href', li.link);
+    newA.setAttribute('title', li.link.substring(li.link.search('://') + 3));
+    newA.textContent = li.description;
+    newLi.appendChild(newA);
+    theList.appendChild(newLi);
+}

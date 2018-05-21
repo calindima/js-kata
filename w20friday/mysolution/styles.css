@@ -1,1 +1,47 @@
 /* TODO: Make it pretty! */
+:root{
+    --color1:#47A8BD;
+    --color2:#9C3848;
+    --color3:#E2DBBE;
+    --full: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--color3);
+    color: var(--color2);
+    font-size: calc(var(--full) * 1.5);
+}
+
+h1 {
+    background: var(--color2);
+    color:var(--color3);
+    width: var(--full);
+    padding: 2em;
+}
+
+p, ul {
+    padding: 1em;
+    width: calc(var(--full) * 0.9);
+    margin: 0 auto;
+}
+ul {
+    list-style: none;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 0.2em;
+}
+li a {
+    text-decoration: none;
+    color: var(--color2);
+    transition: all 0.4s ease-in-out;
+}
+li a:hover{
+    color: var(--color1);
+}
