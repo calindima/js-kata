@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Re-capping fetch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <style>
+    #app{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 1em;
+        margin:1em;
+    }
+    .text {
+        color: #b00b;
+    }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper teal">
+            <a href="#" class="brand-logo center">Tweet Scrambler</a>
+            <ul id="nav-mobile" class="right">
+                <li>
+                    <a href="#" id="love">Love</a>
+                </li>
+                <li>
+                    <a href="#" id="hate">Hate</a>
+                </li>
+                <li>
+                    <a href="#" id="philosophy">Philosophy</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="app"><h1>If you would be so kind to press a navigation button :)</h1></div>
+
+    <template id="tweetTemplate">
+
+        <article class="tweet card">
+
+            <div class="card-content">
+                <h3 class="user-name">John Doe</h3>
+                <h5 class="user-description">Blah blah blah yadda yadda</h5>
+                <h6 class="followers">Followers:
+                    <span>1 million</span>
+                </h6>
+                <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem tempore recusandae deserunt, dicta corporis
+                    nemo!
+                </p>
+            </div>
+        </article>
+    </template>
+
+    <script>
+        "use strict";
+        // let's get those tweets
+        function getData(hashtag) {
+            fetch(`http://kea-alt-del.dk/twitter/api/?count=50&hashtag=${hashtag}`)
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data.statuses);
+                    const tweetsData = data.statuses;
+                    const parent = document.querySelector('#app');
+                    const template = document.querySelector('#tweetTemplate').content;
+
+                    tweetsData.forEach(tdata => {
+                        // console.log(tdata);
+                        const clone = template.cloneNode(true);
+                        const userName = clone.querySelector('.user-name');
+                        const userDescription = clone.querySelector('.user-description');
+                        const followers = clone.querySelector('.followers span');
+                        const text = clone.querySelector('.text');
+
+                        userName.textContent = tdata.user.name;
+                        userDescription.textContent = tdata.user.description;
+                        followers.textContent = tdata.user.followers_count;
+                        text.textContent = tdata.text;
+
+                        parent.appendChild(clone);
+                    });
+                });
+        }
+        // making it so that we choose what theme are the tweets related to
+        const navLinks = document.querySelectorAll('nav li a');
+        navLinks.forEach(n => n.addEventListener('click', e => {
+            document.querySelector('#app').innerHTML = '';
+            getData(e.target.id);
+        }));
+    </script>
+</body>
+
+</html>
